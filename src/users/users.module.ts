@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { BcryptModule } from 'src/bcrypt/bcrypt.module';
+import { BcryptModule } from '../bcrypt/bcrypt.module';
 import { UsersResolver } from './user.resolver';
 import { UsersService } from './users.service';
 
