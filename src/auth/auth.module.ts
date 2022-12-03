@@ -8,6 +8,7 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { AuthController } from './auth.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
+import { BcryptModule } from 'src/bcrypt/bcrypt.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -25,6 +26,7 @@ import * as Joi from 'joi';
         signOptions: { expiresIn: '3600s' },
       }),
     }),
+    BcryptModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, LocalStrategy],

@@ -3,12 +3,14 @@ import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '../users/models/user';
 import { ConfigService } from '@nestjs/config';
+import { BcryptService } from '../bcrypt/bcrypt.service';
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
+    private readonly bcryptService: BcryptService,
   ) {}
 
   validate(email: string, password: string): User | null {
@@ -16,8 +18,7 @@ export class AuthService {
     if (!user) {
       return null;
     }
-    //TODO: bcrypt compare this two password
-    const passwordIsValid = password === user.password;
+    const passwordIsValid = this.bcryptService.compare(password, user.password);
     return passwordIsValid ? user : null;
   }
   login(user: User): { access_token: string } {
