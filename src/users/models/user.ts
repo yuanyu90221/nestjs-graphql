@@ -10,4 +10,6 @@ export class User {
   age: number;
   @Field({ nullable: true })
   isSubscribed?: boolean;
+  @Field({ nullable: true })
+  password?: string;
 }

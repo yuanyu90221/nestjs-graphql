@@ -8,7 +8,14 @@ import { GetUsersArgs } from './dto/args/get-users.args';
 import { DeleteUserInput } from './dto/input/delete-user.input';
 @Injectable()
 export class UsersService {
-  private users: User[] = [];
+  private users: User[] = [
+    {
+      email: 'yuanyu90221@gmail.com',
+      password: 'mypassword',
+      userId: '1',
+      age: 30,
+    },
+  ];
   public createUser(createUserData: CreateUserInput): User {
     const user: User = {
       userId: uuidv4(),
@@ -18,6 +25,7 @@ export class UsersService {
     return user;
   }
   public updateUser(updateUserData: UpdateUserInput): User {
+    //TODO: bcrypt encode the password
     const user = this.users.find(
       (user) => user.userId === updateUserData.userId,
     );
@@ -26,6 +34,10 @@ export class UsersService {
   }
   public getUser(getUserArgs: GetUserArgs): User {
     return this.users.find((user) => user.userId === getUserArgs.userId);
+  }
+
+  public getUserByEmail(email: string): User | undefined {
+    return this.users.find((user) => user.email === email);
   }
   public getUsers(getUsersArgs: GetUsersArgs): User[] {
     return getUsersArgs.userIds.map((userId) => this.getUser({ userId }));

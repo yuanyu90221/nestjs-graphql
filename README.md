@@ -10,8 +10,12 @@ nest new nestjs-graphql
 
 ```shell
 cd nestjs-graphql
-yarn add @nestjs/graphql graphql-tools graphql apollo-server-express @nestjs/apollo
+yarn add @nestjs/graphql graphql-tools graphql apollo-server-express @nestjs/apollo @nestjs/config bcrypt
 ```
 
 ## remove no need module
+
+```shell
+rm src/app.controller.ts src/app.service.ts
+```
 
